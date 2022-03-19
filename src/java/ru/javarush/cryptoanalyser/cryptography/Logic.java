@@ -1,31 +1,41 @@
 package ru.javarush.cryptoanalyser.cryptography;
 
-import static ru.javarush.cryptoanalyser.Alphabet.ALPHABET_CHARS;
-import static ru.javarush.cryptoanalyser.Alphabet.LENGTH_OF_ALPHABET;
+import static ru.javarush.cryptoanalyser.globalconst.Alphabet.*;
+import static ru.javarush.cryptoanalyser.globalconst.Alphabet.ALPHABET_STRING;
 
 public class Logic {
 
-    public static char[] encryptedCharAlfabet(char[] text1,int shift){
-        char[] encryptMessage = new char[text1.length];
-        for (int i = 0; i < text1.length; i++) {
-            for (int j = 0; j < ALPHABET_CHARS.length; j++) {
-                if (text1[i] == ALPHABET_CHARS[j]) {
-                    encryptMessage[i] = ALPHABET_CHARS[(j + shift + LENGTH_OF_ALPHABET)% LENGTH_OF_ALPHABET];
-                }
+    public static String encryptStringAlphabet(char[] inputText, int shift) {
+        String stringAlfabet = new String(inputText);
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < stringAlfabet.length(); i++) {
+            char currentSymbol = stringAlfabet.charAt(i);
+            if (ALPHABET_STRING.indexOf(currentSymbol) != -1) { // проверяем наличие символа в Алфавите строк
+                int currentIndex = ALPHABET_STRING.indexOf(currentSymbol); // получаем индекс
+                int newEncryptIndex = (currentIndex + shift + LENGTH_OF_ALPHABET) % LENGTH_OF_ALPHABET;
+                char encryptSymbol = ALPHABET_STRING.charAt(newEncryptIndex); // получение символа после смещения
+                result.append(encryptSymbol);
+            } else {
+                result.append(currentSymbol);
             }
         }
-        return encryptMessage;
+        return result.toString();
     }
 
-    public static char[] dencryptedCharAlfabet(char[] text1,int shift){
-        char[] encryptMessage = new char[text1.length];
-        for (int i = 0; i < text1.length; i++) {
-            for (int j = 0; j < ALPHABET_CHARS.length; j++) {
-                if (text1[i] == ALPHABET_CHARS[j]) {
-                    encryptMessage[i] = ALPHABET_CHARS[(j - shift + LENGTH_OF_ALPHABET)% LENGTH_OF_ALPHABET];
-                }
+    public static String decryptStringAlphabet(char[] inputText, int shift) {
+        String stringAlfabet = new String(inputText);
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < stringAlfabet.length(); i++) {
+            char currentSymbol = stringAlfabet.charAt(i);
+            if (ALPHABET_STRING.indexOf(currentSymbol) != -1) {
+                int currentIndex = ALPHABET_STRING.indexOf(currentSymbol);
+                int newEncryptIndex = (currentIndex - shift + LENGTH_OF_ALPHABET) % LENGTH_OF_ALPHABET;
+                char encryptSymbol = ALPHABET_STRING.charAt(newEncryptIndex);
+                result.append(encryptSymbol);
+            } else {
+                result.append(currentSymbol);
             }
         }
-        return encryptMessage;
+        return result.toString();
     }
 }
