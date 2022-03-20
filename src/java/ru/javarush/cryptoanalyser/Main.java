@@ -1,6 +1,7 @@
 package ru.javarush.cryptoanalyser;
 
 import ru.javarush.cryptoanalyser.consoleui.StartUI;
+
 import java.util.Scanner;
 
 public class Main {

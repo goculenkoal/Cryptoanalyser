@@ -5,3 +5,4 @@ public class Alphabet {
     public static final String ALPHABET_STRING = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя.,«»\":!? ";
     public static final int LENGTH_OF_ALPHABET = ALPHABET_STRING.length();
 }
+

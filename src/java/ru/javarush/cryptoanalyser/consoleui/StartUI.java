@@ -1,6 +1,8 @@
 package ru.javarush.cryptoanalyser.consoleui;
 import ru.javarush.cryptoanalyser.iologic.FileInput;
 import ru.javarush.cryptoanalyser.iologic.FileOutput;
+
+import java.util.List;
 import java.util.Scanner;
 import static ru.javarush.cryptoanalyser.cryptography.Logic.*;
 
@@ -32,8 +34,13 @@ public class StartUI {
                     FileOutput.writeInfoToFile(result, scanner);
                     System.out.println("ready");
 
-                }
-                else if (selectMenuAction != 5) {
+                } else if (selectMenuAction == 3) {
+                    System.out.println("====== You choose Decrypt by Brute force =====");
+                    List<String> result = bruetforce((FileInput.readInfoFromFile(scanner)));
+                    FileOutput.writeInfoListToFile(result,scanner);
+                    System.out.println("ready");
+
+                } else if (selectMenuAction != 5) {
                     System.out.println("====== You choose Exit =====");
                     System.out.println("====== Bye =====");
                     System.out.println("User choose: " + selectMenuAction);
@@ -43,7 +50,6 @@ public class StartUI {
         }
     }
 
-
     private void showMenu() {
         String[] menu = {"Encrypt text", "Descrypt text", "Descrypt text using Brute force", "Descrypt text using statistical analysis", "Exit"};
         System.out.println("Menu: ");
@@ -52,4 +58,3 @@ public class StartUI {
         }
     }
 }
-

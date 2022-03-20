@@ -14,7 +14,7 @@ public class FileInput {
         try (BufferedReader reader = new BufferedReader(new FileReader(scanner.nextLine()))) {
             while (reader.ready()) {
                 String line = reader.readLine();
-                result.append(line);
+                result.append(line).append("\n");
             }
 
         } catch (FileNotFoundException e) {

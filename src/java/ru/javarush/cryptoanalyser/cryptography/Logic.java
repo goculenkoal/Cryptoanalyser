@@ -1,5 +1,7 @@
 package ru.javarush.cryptoanalyser.cryptography;
 
+import java.util.ArrayList;
+import java.util.List;
 import static ru.javarush.cryptoanalyser.globalconst.Alphabet.*;
 import static ru.javarush.cryptoanalyser.globalconst.Alphabet.ALPHABET_STRING;
 
@@ -37,5 +39,17 @@ public class Logic {
             }
         }
         return result.toString();
+    }
+
+    public static List<String> bruetforce(char[] text) {
+        List<String> list = new ArrayList<>();
+        int shiftLength = LENGTH_OF_ALPHABET;
+        int shift = 0;
+        while (shiftLength != 0) {
+            list.add(encryptStringAlphabet(text,shift));
+            shiftLength--;
+            shift++;
+        }
+        return list;
     }
 }
