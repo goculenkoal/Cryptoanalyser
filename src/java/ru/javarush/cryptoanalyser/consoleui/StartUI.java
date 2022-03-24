@@ -1,4 +1,5 @@
 package ru.javarush.cryptoanalyser.consoleui;
+import ru.javarush.cryptoanalyser.cryptography.FreqAnalysis;
 import ru.javarush.cryptoanalyser.iologic.FileService;
 
 
@@ -40,6 +41,11 @@ public class StartUI {
                     System.out.println("====== You choose Decrypt by Brute force =====");
                     List<String> result = bruetforce((FileService.readInfoFromFile(scanner)));
                     FileService.writeInfoListToFile(result,scanner);
+                    System.out.println("ready");
+
+                } else if (selectMenuAction == 4) {
+                    System.out.println("====== You choose Decrypt using statistical analyse =====");
+                    FreqAnalysis.starting();
                     System.out.println("ready");
 
                 } else if (selectMenuAction != 5) {
