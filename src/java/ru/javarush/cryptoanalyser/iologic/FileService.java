@@ -1,12 +1,10 @@
 package ru.javarush.cryptoanalyser.iologic;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class FileInput {
+public class FileService {
 
     public static char[] readInfoFromFile(Scanner scanner) {
         System.out.print("Enter path to \"input_file.txt\": ");
@@ -26,5 +24,18 @@ public class FileInput {
         }
         result = new StringBuilder(result.toString().toLowerCase(Locale.ROOT));
         return result.toString().toCharArray();
+    }
+
+    public static void writeInfoListToFile(List<String> text, Scanner scanner) {
+        System.out.print("Enter path to \"output_file.txt\": ");
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(scanner.nextLine()))){
+            for (String value : text) {
+                bufferedWriter.write(value + "\n");
+            }
+            bufferedWriter.flush();
+
+        } catch(IOException ex){
+            System.out.println("Output Failed");
+        }
     }
 }

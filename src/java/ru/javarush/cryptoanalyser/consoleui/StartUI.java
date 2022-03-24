@@ -1,13 +1,15 @@
 package ru.javarush.cryptoanalyser.consoleui;
-import ru.javarush.cryptoanalyser.iologic.FileInput;
-import ru.javarush.cryptoanalyser.iologic.FileOutput;
+import ru.javarush.cryptoanalyser.iologic.FileService;
 
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import static ru.javarush.cryptoanalyser.cryptography.Logic.*;
+import static ru.javarush.cryptoanalyser.cryptography.EncryptDescryptLogic.*;
 
 public class StartUI {
     public void start() {
+        System.out.println("Starting......");
         System.out.println("This is utility of cryptoanalyser using Caesar cipher algorythm");
     }
 
@@ -22,22 +24,22 @@ public class StartUI {
                     System.out.println("====== You choose Encrypt method =====");
                     System.out.print("Select shift step: ");
                     int selectShiftStep = Integer.parseInt(scanner.nextLine());
-                    String result = encryptStringAlphabet((FileInput.readInfoFromFile(scanner)), selectShiftStep);
-                    FileOutput.writeInfoToFile(result, scanner);
+                    String result = encryptStringAlphabet((FileService.readInfoFromFile(scanner)), selectShiftStep);
+                    FileService.writeInfoListToFile(Collections.singletonList(result), scanner);
                     System.out.println("ready");
 
                 } else if (selectMenuAction == 2) {
                     System.out.println("====== You choose Decrypt method =====");
                     System.out.print("Select shift step: ");
                     int selectShiftStep = Integer.parseInt(scanner.nextLine());
-                    String result = (decryptStringAlphabet(FileInput.readInfoFromFile(scanner), selectShiftStep));
-                    FileOutput.writeInfoToFile(result, scanner);
+                    String result = (decryptStringAlphabet(FileService.readInfoFromFile(scanner), selectShiftStep));
+                    FileService.writeInfoListToFile(Collections.singletonList(result), scanner);
                     System.out.println("ready");
 
                 } else if (selectMenuAction == 3) {
                     System.out.println("====== You choose Decrypt by Brute force =====");
-                    List<String> result = bruetforce((FileInput.readInfoFromFile(scanner)));
-                    FileOutput.writeInfoListToFile(result,scanner);
+                    List<String> result = bruetforce((FileService.readInfoFromFile(scanner)));
+                    FileService.writeInfoListToFile(result,scanner);
                     System.out.println("ready");
 
                 } else if (selectMenuAction != 5) {
@@ -53,8 +55,8 @@ public class StartUI {
     private void showMenu() {
         String[] menu = {"Encrypt text", "Descrypt text", "Descrypt text using Brute force", "Descrypt text using statistical analysis", "Exit"};
         System.out.println("Menu: ");
-        for (int i = 0; i < menu.length; i++) {
-            System.out.println(i + 1 + "." + menu[i]);
+        for (int i = 1; i <= menu.length; i++) {
+            System.out.println(i + "." + menu[i-1]);
         }
     }
 }
